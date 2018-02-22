@@ -1,0 +1,256 @@
+.home-bg {
+  background: url("/images/stars.jpg");
+  height: 100vh;
+}
+
+.devX {
+  text-align: center;
+  color: #dbe0e7;
+}
+
+#welcome {
+  color: #dbe0e7;
+  text-align: center;
+}
+
+.signin {
+  text-align: center;
+  border: 5px solid #1f3e5a;
+  border-radius: 50px;
+  background-color: #281c3c;
+  display: inline-block;
+  height: 300px;
+  width: 330px;
+  padding: 50px;
+  margin-top: 80px;
+  color: #ffffff;
+}
+
+#background {
+  background-image: url('/images/purpleSpace.jpg');
+  position: fixed;
+  background-size: 100%;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+#signUpForm {
+  display: flex;
+  justify-content: center;
+}
+.signup {
+  text-align: center;
+  border: 5px solid #c5ead8;
+  border-radius: 50px;
+  background-color: #c5ead8;
+  display: inline-block;
+  height: 300px;
+  width: 300px;
+  padding: 50px;
+}
+
+.scoreBoard {
+  font-size: 15px;
+  width: 850px;
+  padding: 15px;
+  background-color: #dbe0e7;
+  margin: 0 auto;
+  color: #0d2e47;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.8;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.question {
+  font-size: 30px;
+  width: 850px;
+  padding: 15px;
+  background-color: #dbe0e7;
+  margin: 0 auto;
+  color: #0d2e47;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.8;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.category {
+  font-size: 15px;
+  width: 850px;
+  padding: 15px;
+  background-color: #dbe0e7;
+  margin: 0 auto;
+  color: #0d2e47;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.8;
+}
+
+.score {
+  font-size: 15px;
+  width: 850px;
+  padding: 15px;
+  background-color: #dbe0e7;
+  margin: 0 auto;
+  color: #0d2e47;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.8;
+}
+
+.primary {
+  margin: 0 auto;
+}
+
+.trans {
+  background-color: white;
+  color: #0d2e47;
+  opacity: 0.6;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.currentQuestion.category {
+  font-size: 499px;
+}
+
+#logInbtn {
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  color: #000000;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 259px;
+  margin-top: 45px;
+}
+
+#logInbtn:hover {
+  background-color: #1f3e5a;
+  border-color: #1f3e5a;
+  color: #fff;
+  transition-duration: 1s;
+}
+
+.masterForm {
+  display: flex;
+  align-content: center;
+}
+
+#form-bg {
+    background: url("/images/stars.jpg");
+    background-attachment: fixed;
+    height: 135vh;
+    width: 100vw;
+}
+
+.answer-container {
+  min-width: 400px;
+  max-width: 850px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.answer-button {
+  margin: 20px;
+  background-color: #dbe0e7;
+  min-width: 370px;
+  padding: 10px 30px;
+  border-radius: 5px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.answer-button:hover {
+  background-color: #83868a;
+  color: #fff;
+  opacity: 1;
+}
+
+.welcome {
+  color: #dbe0e7;
+}
+
+.forms {
+  justify-content: center;
+  text-align: center;
+  border: 5px solid #1f3e5a;
+  border-radius: 50px;
+  background-color: #281c3c;
+  height: 645px;
+  width: 330px;
+  padding: 55px;
+  color: #ffffff;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.forms h3 {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#submit {
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+  color: #000000;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 230px;
+}
+#submit:hover {
+  background-color: #1f3e5a;
+  border-color: #1f3e5a;
+  color: #fff;
+  transition-duration: 1s;
+}
+
+.answer-container {
+  min-width: 400px;
+  max-width: 850px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.answer-button {
+  margin: 20px;
+  background-color: #dbe0e7;
+  min-width: 370px;
+  padding: 10px 30px;
+  border-radius: 5px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.answer-button:hover {
+  background-color: #83868a;
+  color: #fff;
+  opacity: 1;
+}
+.welcome {
+  color: #dbe0e7;
+  text-align: center;
+}
+
+#waiting {
+  text-align: center;
+  color: #dbe0e7;
+  padding: 10px 30px;
+  height: 200px;
+  font-size: 80px;
+  opacity: 0.4;
+}
+
+#alert-check-again {
+  margin: 0 auto;
+}

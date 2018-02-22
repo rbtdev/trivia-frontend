@@ -1,0 +1,113 @@
+.chat {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: left;
+    border: 1px solid #777777;
+    min-width: 300px;
+    width: 33%;
+    height: 400px;
+}
+
+.chat-content {
+    height: 100%;
+    width: 100%;
+}
+
+.chat-userlist {
+    width: 25%;
+    height: 100%;
+    float: left;
+    font-size: 12px;
+    border-right: 1px solid black;
+}
+
+.chat-userlist-username {
+    padding: 5px;
+}
+.chat-userlist-title {
+    text-align: center;
+    padding:2px;
+    border-bottom: 1px solid black;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.chat-messages {
+    float: left;
+    width: 75%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.chat-input {
+    width: 100%;
+    clear: both;
+    border-top: 1px solid #777777;
+}
+
+.chat-input-send {
+    position: relative;
+    right: -1px;
+    float: right;
+    width: 20%;
+}
+
+.chat-input-text {
+    position: relative;
+    left: -1px;
+    float:left;
+    width:80%;
+}
+
+.chat-typing-indicator {
+    height: 20px;
+}
+
+.chat-typing-indicator.active {
+}
+
+.chat-typing-indicator.active::before {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    content: '';
+    top: -3px;
+}
+
+.chat-clear {
+    clear: both;
+}
+.chat-message {
+    background-color: lightgreen;
+    padding: 3px;
+    border-radius: 3px;
+    max-width: 75%;
+    min-width: 10%;
+    float:left;
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
+.chat-message.owner {
+    float: right;
+    margin-left: 0px;
+    margin-right: 3px;
+    background-color: lightblue;
+}
+.chat-message-text {
+    color: black;
+    padding-left: 5px;
+}
+
+.chat-message-username {
+    font-size: 16px;
+}
+
+.chat-message-timeStamp {
+    font-style: italic;
+    font-size: 8px;
+}
