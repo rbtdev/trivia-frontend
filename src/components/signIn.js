@@ -8,10 +8,10 @@ import {
     FormControl,
     Row
 } from "react-bootstrap";
-
 class SignIn extends Component {
     constructor(props) {
         super(props);
+        this.onSignIn = props.onSignIn;
         this.state = {
             form: {
                 email: "",
@@ -25,11 +25,12 @@ class SignIn extends Component {
         formState[e.target.name] = e.target.value;
         this.setState({ form: formState });
     }
-
+    login () {
+        this.onSignIn(this.state.form)
+    }
     render() {
         const { form, errors } = this.state
         const { firstName, lastName, email, password } = form
-
         return (
             <form>
                 <Row>
@@ -46,7 +47,6 @@ class SignIn extends Component {
                         </FormGroup>
                     </Col>
                 </Row>
-
                 <Row>
                     <Col xs={6}>
                         <FormGroup>
@@ -61,14 +61,11 @@ class SignIn extends Component {
                         </FormGroup>
                     </Col>
                 </Row>
-
                 <Row>
                     <Col xs={6}>
-                        <Link to="/games">
-                            <Button id="logInbtn">
+                            <Button id="logInbtn" onClick = {this.login.bind(this)} >
                                 Log into your Trivia Account!
                             </Button>
-                        </Link>
                     </Col>
                 </Row>
                 <Row>

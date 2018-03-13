@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import SignIn from '../components/signIn'
 import '../App.css';
-
 class LandingPageView extends Component {
+    constructor (props) {
+        super();
+        this.onSignIn = props.onSignIn;
+    }
   render() {
     return (
         <div className="home-bg">
@@ -12,13 +15,11 @@ class LandingPageView extends Component {
             <div className="container">
                 <div className="signin">
                     <h3>Sign-In</h3>
-                        <SignIn />
+                        <SignIn onSignIn = {this.onSignIn}/>
                 </div>
             </div>
         </div>
-
     );
   }
 }
-
 export default LandingPageView;
