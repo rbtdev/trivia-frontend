@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import SignUp from './components/signUp'
-import LandingPage from './pages/landing-page'
-import GamePage from './pages/game-page'
+import GamePage from './pages/game-page';
 import './App.css'
 class App extends Component {
     constructor(props) {
@@ -31,31 +29,14 @@ class App extends Component {
             })
             .catch(e => console.log("error creating user:", e))
     }
+
+
     render() {
-        const { username } = this.state
-        var page = null
-        if (username) {
-            page = <GamePage username={this.state.username} />
-        }
-        else {
-            page =
-            <Router>
-                <div className="header">
-                    <div id="landingPage">
-                        <Route exact path='/' render={(props) => {
-                            return <LandingPage onSignIn={this.onSignIn.bind(this)} {...props} />
-                        }} />
-                    </div>
-                    <Route path='/games' render={(props) => {
-                        return <GamePage username={username} {...props} />
-                    }} />
-                    <Route path='/signup' render={(props) => {
-                        return <SignUp onSubmit={createNewUser} />
-                    }} />
-                </div>
-            </Router>
-        }
-        return page;
+        return (
+            <div className="header">
+                    <GamePage />
+            </div>
+        )
     }
 }
 const API = "http://localhost:3000"

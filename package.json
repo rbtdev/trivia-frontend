@@ -12,11 +12,11 @@
     "socket.io-client": "^2.0.4"
   },
   "proxy": {
-  "/socket.io": {
-    "target": "ws://localhost:3000",
-    "ws": true
-  }
-},
+    "/socket.io": {
+      "target": "ws://localhost:3000",
+      "ws": true
+    }
+  },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
