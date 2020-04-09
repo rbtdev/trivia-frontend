@@ -19,7 +19,7 @@ class GamePage extends Component {
     this.state = {
       error: null,
       gameCreated: false,
-      gameId: null,
+      gameId: this.props.match.params.gameId || null,
       username: null,
       joinGame: false
     }
@@ -42,15 +42,58 @@ class GamePage extends Component {
     })
   }
 
-  next() {
+  createGame() {
+    if (this.state.username) this.socket.emit('create-game');
+  }
+
+  signin() {
     if (this.state.gameId && this.state.username) this.setState({ joinGame: true });
-    else this.socket.emit('create-game');
   }
 
   render() {
     let step = null;
+    console.log(JSON.stringify(this.props));
     if (this.state.joinGame) {
       step = <Game onQuit={error => this.onQuit(error)} socket={this.socket} gameId={this.state.gameId} username={this.state.username} />
+    }
+    else if (this.props.match.params.gameId) {
+      step = <div>
+        <div className="home-bg">
+          <div>
+            <h1 className="devX">Corona Trivia!</h1>
+          </div>
+          <div className="container">
+            <div className="signup">          {this.state.error &&
+              <div>
+                Error during game {this.state.error}
+              </div>
+            }
+              <form>
+                <Row>
+                  <Col xs={6}>
+                    <FormGroup>
+                      <FormControl
+                        type="text"
+                        name="username"
+                        placeholder="Player name"
+                        value={this.state.username}
+                        onChange={e => this.setState({ username: e.target.value })}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6}>
+                    <FormGroup>
+                      <Button className="logInbtn" onClick={() => this.signin()}>Join Game</Button>
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     }
     else if (this.state.gameCreated && this.state.gameId) {
       step =
@@ -58,13 +101,14 @@ class GamePage extends Component {
           <div className="home-bg">
             <div>
               <div>
-                <h1 className="devX">DevX Trivia</h1>
+                <h1 className="devX">Corona Trivia!</h1>
               </div>
               <div className="container">
                 <div className="signup">
-                  <div>You new game ID is {this.state.gameId}</div>
-                  <div>Send this Game ID to other players and they can join the game</div>
-                  <button onClick={() => this.next()}>Join Game Now</button>
+                  <div>Your new game ID is {this.state.gameId}</div>
+                  <div>Send this URL to other players and they can join the game</div>
+                  <div className='gameUrl'>{`${window.location.href}games/${this.state.gameId}`}</div>
+                  <button onClick={() => this.signin()}>Join Game Now</button>
                 </div>
               </div>
             </div>
@@ -76,7 +120,7 @@ class GamePage extends Component {
         <div>
           <div className="home-bg">
             <div>
-              <h1 className="devX">DevX Trivia</h1>
+              <h1 className="devX">Corona Trivia!</h1>
             </div>
             <div className="container">
               <div className="signup">          {this.state.error &&
@@ -88,11 +132,10 @@ class GamePage extends Component {
                   <Row>
                     <Col xs={6}>
                       <FormGroup>
-                        <ControlLabel id="username"></ControlLabel>
                         <FormControl
                           type="text"
                           name="username"
-                          placeholder="Username"
+                          placeholder="Player name"
                           value={this.state.username}
                           onChange={e => this.setState({ username: e.target.value })}
                         />
@@ -100,24 +143,10 @@ class GamePage extends Component {
                     </Col>
                   </Row>
                   <Row>
-                    <Col xs={6}>
+                    <Col xs={6} >
                       <FormGroup>
-                        <ControlLabel id="password"></ControlLabel>
-                        <FormControl
-                          type="text"
-                          name="game-id"
-                          placeholder="Game ID"
-                          value={this.state.ganeId}
-                          onChange={e => this.setState({ gameId: e.target.value })}
-                        />
+                        <Button className="logInbtn" onClick={() => this.createGame()}>Create New Game</Button>
                       </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6}>
-                      <Button id="logInbtn" onClick={() => this.next()}>
-                        {this.state.gameId ? 'Join Game' : 'Create New Game'}
-                      </Button>
                     </Col>
                   </Row>
                 </form>

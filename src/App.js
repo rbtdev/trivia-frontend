@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import GamePage from './pages/game-page';
 import './App.css'
 class App extends Component {
@@ -33,9 +33,12 @@ class App extends Component {
 
     render() {
         return (
-            <div className="header">
-                    <GamePage />
-            </div>
+            <Router>
+                <Switch>
+                    <Route path='/games/:gameId' component={GamePage} />
+                    <Route path='/' component={GamePage} />
+                </Switch>
+            </Router>
         )
     }
 }

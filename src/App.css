@@ -1,3 +1,4 @@
+
 .home-bg {
   background: url("/images/stars.jpg");
   height: 100vh;
@@ -49,55 +50,115 @@
   padding: 50px;
 }
 
-.scoreBoard {
+.responses {
   font-size: 15px;
   padding: 15px;
   background-color: #eaeff7;
   margin: 0 auto;
   color: #000000;
-  font-family: Arial, Helvetica, sans-serif;
-  opacity: 0.9;
-  float: left;
+  opacity: 1;
+  float: right;
+  border-radius: 5px;
+  max-height: 700px;
+  overflow-y: scroll;
 }
 
-.playerRank {
+.responses .title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.responses .header {
+  border-bottom: 1px solid black;
+}
+
+.responses .number {
   display: inline-block;
   width: 50px;
 }
 
-.playerUserName {
+.responses .answer {
   display: inline-block;
-  width: 100px;
+  width: 200px;
 }
 
-.playerScore {
+.responses .points {
   display: inline-block;
-  width: 100px;
+  width: 50px;
+  text-align: right;
+}
+
+.scoreboard {
+  font-size: 15px;
+  padding: 15px;
+  background-color: #eaeff7;
+  margin: 0 auto;
+  color: #000000;
+  opacity: 1;
+  float: left;
+  border-radius: 5px;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+.scoreboard .title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.scoreboard .header {
+  border-bottom: 1px solid black;
+}
+
+.scoreboard .playerElement {
+  color: #333333;
+}
+
+.scoreboard .playerElement.active {
+  color: black;
+  font-weight: bold;
+}
+
+.scoreboard .playerRank {
+  display: inline-block;
+  width: 50px;
+}
+
+.scoreboard .playerUserName {
+  display: inline-block;
+  width: 150px;
+}
+
+.scoreboard .playerScore {
+  display: inline-block;
+  width: 50px;
+  text-align: right;;
+}
+
+
+.content {
+  text-align: center;
+  width: 850px;
+  padding: 15px;
+  background-color: #eaeff7;
+  margin: 0 auto;
+  margin: 0 auto;
+  color: #000000;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+
+.category {
+  font-size: 30px;
 }
 
 .question {
   font-size: 30px;
-  width: 850px;
-  padding: 15px;
-  background-color: #eaeff7;
-  margin: 0 auto;
-  margin-top: 50px;
-  color: #000000;
-  font-family: Arial, Helvetica, sans-serif;
-  opacity: 0.9;
   border-radius: 15px;
   text-align: center;
-}
-
-.category {
-  font-size: 30px;
-  width: 850px;
-  padding: 15px;
-  background-color: #eaeff7;
-  margin: 0 auto;
-  color: #000000;
-  font-family: Arial, Helvetica, sans-serif;
-  opacity: 0.9;
 }
 
 .score {
@@ -107,8 +168,7 @@
   background-color: #eaeff7;
   margin: 0 auto;
   color: #000000;
-  font-family: Arial, Helvetica, sans-serif;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .primary {
@@ -118,7 +178,7 @@
 .trans {
   background-color: white;
   color: #000000;
-  opacity: 0.6;
+  opacity: 1.6;
 }
 
 .container {
@@ -130,13 +190,12 @@
   font-size: 499px;
 }
 
-#logInbtn {
+.logInbtn {
   background-color: #ffffff;
   border: 2px solid #000000;
-  margin-left: 45px;
 }
 
-#logInbtn:hover {
+.logInbtn:hover {
   background-color: #1f3e5a;
   border-color: #1f3e5a;
   color: #fff;
@@ -153,32 +212,6 @@
     background-attachment: fixed;
     height: 135vh;
     width: 100vw;
-}
-
-.answer-container {
-  min-width: 400px;
-  max-width: 850px;
-  margin: 20px auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.answer-button {
-  margin: 20px;
-  background-color: #eaeff7;
-  color: #000000;
-  min-width: 370px;
-  padding: 10px 30px;
-  border-radius: 5px;
-  text-align: center;
-  opacity: 0.9;
-}
-
-.answer-button:hover {
-  background-color: #83868a;
-  color: #fff;
-  opacity: 1;
 }
 
 .welcome {
@@ -231,16 +264,17 @@
 
 .answer-button {
   margin: 20px;
-  background-color: #eaeff7;
   min-width: 370px;
   padding: 10px 30px;
   border-radius: 5px;
+  border: 1px solid black;
   text-align: center;
-  opacity: 0.9;
+  opacity: 1;
+  color: black;
 }
 
 .answer-button:hover {
-  background-color: #83868a;
+  background-color: #969ba0;
   color: #fff;
   opacity: 1;
 }
@@ -249,15 +283,17 @@
   text-align: center;
 }
 
-#waiting {
-  text-align: center;
-  color: #eaeff7;
-  padding: 10px 30px;
-  height: 200px;
-  font-size: 80px;
-  opacity: 0.4;
-}
-
 #alert-check-again {
   margin: 0 auto;
+}
+
+.gameContainer {
+  padding: 40px;
+}
+
+.gameUrl {
+  font-size: larger;
+  font-weight: bold;
+  padding: 10px;
+
 }

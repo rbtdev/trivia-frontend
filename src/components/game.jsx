@@ -49,16 +49,14 @@ class Game extends Component {
 
 
         this.state = {
-            connecting: true,
+            mode: 'connecting',
             signinError: null,
-            waiting: false,
-            getReady: false,
             question: {},
             answerStatus: '',
             correctAnswer: '',
             score: 0,
-            timeout: false,
             scoreList: [],
+            responses: []
         };
 
         this.props.socket.on('signin', signinError => this.props.onQuit(signinError));
@@ -80,17 +78,20 @@ class Game extends Component {
             correctAnswer: ''
         }));
 
-        this.props.socket.on('right', score => this.setState({
+        this.props.socket.on('right', (points, answer) => this.setState({
+            responses: [...this.state.responses, { points, answer }],
             question: {},
-            mode: 'right',
-            score,
+            feedback: 'right',
+            mode: 'answering',
             correctAnswer: '',
             timeout: false
         }));
 
-        this.props.socket.on('wrong', correctAnswer => this.setState({
-            mode: 'wrong',
+        this.props.socket.on('wrong', (correctAnswer, answer) => this.setState({
+            responses: [...this.state.responses, { points: 0, answer }],
             question: {},
+            feedback: 'wrong',
+            mode: 'answering',
             correctAnswer,
             timeout: false
         }));
@@ -106,59 +107,113 @@ class Game extends Component {
         return background;
     }
 
+    get responses() {
+        let responses = this.state.responses.map((response, index) => (
+            <div key={index}>
+                <div className='number'>{index + 1}</div>
+                <div className='answer'>{decodeEntities(response.answer)}</div>
+                <div className='points'>{response.points}</div>
+            </div>
+        ))
+        return (
+            <div className='responses'>
+                <div className='title'>Response History</div>
+                <div key='header' className='header'>
+                    <div className='number'>#</div>
+                    <div className='answer'>Your Answer</div>
+                    <div className='points'>Points</div>
+                </div>
+                {responses}
+            </div>
+        )
+    }
+
     get scoreboard() {
         let scoreList = [...this.state.scoreList];
         let place = 1;
         let prevPlayer = null;
-        let scoreboard = scoreList.sort((a,b) => (b.score - a.score)).map((player, index) => {
+        let scoreboard = scoreList.sort((a, b) => (b.score - a.score)).map((player, index) => {
             if (prevPlayer && player.score < prevPlayer.score) place++;
+            let isCurrentUser = player.username === this.props.username ? 'active' : '';
             prevPlayer = player;
             let playerElement =
-                <div key = {index} className='playerElement'>
+                <div key={index} className={`playerElement ${isCurrentUser}`}>
                     <div className='playerRank'>{place}</div>
                     <div className='playerUserName'>{player.username}</div>
                     <div className='playerScore'>{player.score}</div>
                 </div>
             return playerElement;
         })
+
         return (
-            <div className='scoreBoard'>
+            <div className='scoreboard'>
+                <div className='title'>Scores</div>
+                <div key='header' className='header'>
+                    <div className='playerRank'>Place</div>
+                    <div className='playerUserName'>Name</div>
+                    <div className='playerScore'>Score</div>
+                </div>
                 {scoreboard}
             </div>
         );
     }
 
     get content() {
+        const feedback = () => {
+            if (this.state.feedback === 'right') return (
+                <div>
+                    <div className='question'> You are Right!</div>
+                </div>
+            )
+            else if (this.state.feedback === 'wrong') return (<div>
+                <div className='question'> You are Wrong! the correct answer is "{decodeEntities(this.state.correctAnswer)}"</div>
+            </div>)
+            else return null;
+        }
         let currentQuestion = this.state.question
         let answers = currentQuestion.answers;
         const { score } = this.state
         let content = <div>
-            <p>Invalid state {this.state.mode}</p>
+            Invalid state {this.state.mode}
         </div>
 
         switch (this.state.mode) {
             case 'connecting': {
-                content = <div>
+                content = <div className='category'>
                     Connecting to game {this.props.gameId}...
             </div>
             }
             case 'waiting':
                 content =
                     <div>
-                        <div id='waiting'>You'll be in the game for the next question, hold tight</div>
+                        <div className='category' id='waiting'>You'll be in the game for the next question, hold tight</div>
                     </div>
                 break;
             case 'getready':
                 content =
                     <div>
-                        <div id='waiting'>Ok, here comes the next question</div>
+                        {feedback()}
+                        <div className='category' id='waiting'>Ok, here comes the next question</div>
+                    </div>
+                break;
+            case 'answering':
+                content =
+                    <div>
+                        {feedback()}
+                        <div className='category' id='waiting'>Waiting for all answers to come in</div>
                     </div>
                 break;
             case 'question':
                 content =
                     <div>
-                        <p className='category'>{currentQuestion.category} - {currentQuestion.points} points </p>
-                        <p className='question'> {decodeEntities(currentQuestion.question)} </p>
+                        <div className='category'>{currentQuestion.category} - {currentQuestion.points} points </div>
+                        <div className='question'>
+                            <div>
+                                Question #{currentQuestion.number}
+                            </div>
+                            <div>
+                                {decodeEntities(currentQuestion.question)}
+                            </div> </div>
                         <div className="answer-container">
                             {answers.map((a) => {
                                 return <div className="answer-button" key={a} onClick={this.answerClick.bind(this, a)}> {decodeEntities(a)} </div>
@@ -166,28 +221,17 @@ class Game extends Component {
                         </div>
                     </div>
                 break;
-            case 'right':
-                content =
-                    <div>
-                        <h3 className='score'> Score: {score} </h3>
-                        <p className='question'> You are Right!</p>
-                    </div>
-                break;
-            case 'wrong':
-                content =
-                    <div>
-                        <h3 className='score'> Score: {score} </h3>
-                        <p className='question'> You are Wrong! the correct answer is "{this.state.correctAnswer}"</p>
-                    </div>
-                break;
             case 'timeout':
                 content =
                     <div >
-                        <p> Sorry, time is up.</p>
+                        Sorry, time is up.
                     </div>
                 break;
         }
-        return content;
+
+        return <div className='content'>
+            {content}
+        </div>;
     }
 
     answerClick(answer) {
@@ -202,8 +246,12 @@ class Game extends Component {
         return (
             <div>
                 {this.background}
-                {this.scoreboard}
-                {this.content}
+                <div className="gameContainer">
+                    {this.responses}
+                    {this.scoreboard}
+                    {this.content}
+                </div>
+
             </div >
         )
     }
